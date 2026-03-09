@@ -496,22 +496,21 @@ h2 {
 }
 
 .faq-answer {
-  display: grid;
+  max-height: 0;
+  opacity: 0;
   overflow: hidden;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 260ms ease;
+  transition: max-height 260ms ease, opacity 220ms ease;
 }
 
 .faq-answer p {
   color: var(--ink-soft);
-  min-height: 0;
   margin: 0;
-  overflow: hidden;
   padding: 0 1rem;
 }
 
 .faq-item.is-open .faq-answer {
-  grid-template-rows: 1fr;
+  max-height: 220px;
+  opacity: 1;
 }
 
 .faq-item.is-open .faq-answer p {

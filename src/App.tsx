@@ -132,20 +132,20 @@ const faqItems = [
     answer: "Pricing is based on active member range per church, billed monthly with a 30-day free trial.",
   },
   {
-    question: "How quickly can we onboard?",
-    answer: "Most churches can be onboarded within days, including user setup, roles, and ministry modules.",
+    question: "How can we onboard our church?",
+    answer: "Most churches can onboard within days with guided setup for users, roles, events, announcements, and giving.",
   },
   {
     question: "Who owns our church data?",
     answer: "Your church retains ownership of your data. Church Circle acts as the platform provider only.",
   },
   {
-    question: "Are mobile apps available?",
-    answer: "Yes, Church Circle is available on iOS and Android. Public store links will be activated when listings are live.",
+    question: "How is support handled after we go live?",
+    answer: "Our team provides direct support with fast response times, plus practical onboarding and rollout guidance.",
   },
   {
-    question: "Can we migrate from spreadsheets or other tools?",
-    answer: "Yes. We support guided migration of member, event, and giving records with onboarding assistance.",
+    question: "Can we turn off features we do not need?",
+    answer: "Yes. Church leaders can enable or disable modules based on their ministry needs and growth stage.",
   },
 ];
 
