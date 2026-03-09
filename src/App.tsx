@@ -200,7 +200,7 @@ export default function App() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+            entry.target.setAttribute("data-visible", "true");
             observer.unobserve(entry.target);
           }
         });

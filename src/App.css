@@ -703,7 +703,7 @@ h2 {
   transition: opacity 560ms ease, transform 560ms ease;
 }
 
-.reveal.is-visible {
+.reveal[data-visible="true"] {
   opacity: 1;
   transform: translateY(0);
 }
