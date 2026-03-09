@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent, type TouchEvent } from "react";
 import "./App.css";
 
 type PricingTier = {
@@ -87,6 +87,68 @@ const platformPreview = [
   },
 ];
 
+const screenshotSlides = [
+  {
+    title: "Home Dashboard",
+    subtitle: "Daily overview for pastors and admins",
+    module: "Home",
+    accent: "sunset",
+  },
+  {
+    title: "Events Explorer",
+    subtitle: "Manage calendar, filters, and attendance",
+    module: "Events",
+    accent: "violet",
+  },
+  {
+    title: "Announcements Board",
+    subtitle: "Broadcast updates and track reads",
+    module: "Announcements",
+    accent: "plum",
+  },
+  {
+    title: "Sermons + Prayer Line",
+    subtitle: "Live prayer calls and sermon publishing",
+    module: "Sermons",
+    accent: "ember",
+  },
+  {
+    title: "Giving Flow",
+    subtitle: "Simple, recurring, and Gift Aid-ready giving",
+    module: "Give",
+    accent: "gold",
+  },
+  {
+    title: "Payments Reporting",
+    subtitle: "Net received, donor history, and payment status",
+    module: "Payments",
+    accent: "navy",
+  },
+];
+
+const faqItems = [
+  {
+    question: "How does pricing work?",
+    answer: "Pricing is based on active member range per church, billed monthly with a 30-day free trial.",
+  },
+  {
+    question: "How quickly can we onboard?",
+    answer: "Most churches can be onboarded within days, including user setup, roles, and ministry modules.",
+  },
+  {
+    question: "Who owns our church data?",
+    answer: "Your church retains ownership of your data. Church Circle acts as the platform provider only.",
+  },
+  {
+    question: "Are mobile apps available?",
+    answer: "Yes, Church Circle is available on iOS and Android. Public store links will be activated when listings are live.",
+  },
+  {
+    question: "Can we migrate from spreadsheets or other tools?",
+    answer: "Yes. We support guided migration of member, event, and giving records with onboarding assistance.",
+  },
+];
+
 const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
   return new Intl.NumberFormat("en-GB", {
     style: "currency",
@@ -108,6 +170,11 @@ export default function App() {
   });
   const [contactStatus, setContactStatus] = useState("");
   const [isSubmittingContact, setIsSubmittingContact] = useState(false);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [dragStartX, setDragStartX] = useState<number | null>(null);
+  const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [cursorPosition, setCursorPosition] = useState({ x: -120, y: -120 });
 
   useEffect(() => {
     const targets = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
@@ -130,6 +197,65 @@ export default function App() {
     targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const maxScrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScrollable <= 0 ? 0 : Math.min(100, Math.max(0, (window.scrollY / maxScrollable) * 100));
+      setScrollProgress(progress);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onMove = (event: MouseEvent) => {
+      setCursorPosition({ x: event.clientX, y: event.clientY });
+    };
+
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setActiveSlideIndex((previous) => (previous + 1) % screenshotSlides.length);
+    }, 5200);
+    return () => clearInterval(timerId);
+  }, []);
+
+  const activeSlide = useMemo(() => screenshotSlides[activeSlideIndex], [activeSlideIndex]);
+
+  const goToSlide = (nextIndex: number) => {
+    if (nextIndex < 0) {
+      setActiveSlideIndex(screenshotSlides.length - 1);
+      return;
+    }
+    if (nextIndex >= screenshotSlides.length) {
+      setActiveSlideIndex(0);
+      return;
+    }
+    setActiveSlideIndex(nextIndex);
+  };
+
+  const onCarouselTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    setDragStartX(event.touches[0]?.clientX ?? null);
+  };
+
+  const onCarouselTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if (dragStartX == null) {
+      return;
+    }
+
+    const endX = event.changedTouches[0]?.clientX ?? dragStartX;
+    const delta = endX - dragStartX;
+    if (Math.abs(delta) > 40) {
+      goToSlide(delta > 0 ? activeSlideIndex - 1 : activeSlideIndex + 1);
+    }
+    setDragStartX(null);
+  };
 
   const onContactFieldChange =
     (key: "fullName" | "email" | "churchName" | "message") =>
@@ -201,6 +327,12 @@ export default function App() {
 
   return (
     <div className="site-shell">
+      <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} aria-hidden="true" />
+      <div
+        className="cursor-glow"
+        style={{ transform: `translate(${cursorPosition.x - 90}px, ${cursorPosition.y - 90}px)` }}
+        aria-hidden="true"
+      />
       <header className="hero">
         <div className="ambient ambient-one" aria-hidden="true" />
         <div className="ambient ambient-two" aria-hidden="true" />
@@ -269,23 +401,70 @@ export default function App() {
             <p className="eyebrow">Platform Preview</p>
             <h2>See how Church Circle runs daily church life, end to end.</h2>
           </div>
-          <div className="preview-grid">
-            {platformPreview.map((item, index) => (
-              <article key={item.title} className="preview-card reveal" style={{ transitionDelay: `${index * 70}ms` }}>
-                <div className="preview-phone-shell">
-                  <div className="preview-phone-notch" />
-                  <div className="preview-phone-content">
-                    <p className="preview-subtitle">{item.subtitle}</p>
-                    <h3>{item.title}</h3>
-                    <ul>
-                      {item.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                  </div>
+          <div
+            className="carousel reveal"
+            onTouchStart={onCarouselTouchStart}
+            onTouchEnd={onCarouselTouchEnd}
+            role="region"
+            aria-label="Church Circle app screenshots"
+          >
+            <button className="carousel-nav carousel-prev" onClick={() => goToSlide(activeSlideIndex - 1)} aria-label="Previous screenshot">
+              ←
+            </button>
+            <article className={`carousel-slide accent-${activeSlide.accent}`}>
+              <div className="preview-phone-shell">
+                <div className="preview-phone-notch" />
+                <div className="preview-phone-content">
+                  <p className="preview-subtitle">{activeSlide.subtitle}</p>
+                  <h3>{activeSlide.title}</h3>
+                  <p className="preview-module-tag">{activeSlide.module}</p>
                 </div>
-              </article>
+              </div>
+              <div className="carousel-copy">
+                <h3>{platformPreview[activeSlideIndex]?.title ?? activeSlide.title}</h3>
+                <ul>
+                  {(platformPreview[activeSlideIndex]?.points ?? []).map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+            <button className="carousel-nav carousel-next" onClick={() => goToSlide(activeSlideIndex + 1)} aria-label="Next screenshot">
+              →
+            </button>
+          </div>
+          <div className="carousel-dots reveal" aria-hidden="true">
+            {screenshotSlides.map((item, index) => (
+              <button
+                key={item.title}
+                className={`carousel-dot ${index === activeSlideIndex ? "is-active" : ""}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to ${item.title}`}
+              />
             ))}
+          </div>
+        </section>
+
+        <section className="section section-faq" id="faq">
+          <div className="section-head reveal">
+            <p className="eyebrow">FAQ</p>
+            <h2>Answers churches ask before onboarding.</h2>
+          </div>
+          <div className="faq-list">
+            {faqItems.map((item, index) => {
+              const isOpen = activeFaqIndex === index;
+              return (
+                <article key={item.question} className={`faq-item reveal ${isOpen ? "is-open" : ""}`}>
+                  <button className="faq-trigger" onClick={() => setActiveFaqIndex(isOpen ? null : index)} aria-expanded={isOpen}>
+                    <span>{item.question}</span>
+                    <span className="faq-icon">{isOpen ? "−" : "+"}</span>
+                  </button>
+                  <div className="faq-answer" aria-hidden={!isOpen}>
+                    <p>{item.answer}</p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -409,6 +588,18 @@ export default function App() {
           <a href="#">Terms</a>
         </div>
       </footer>
+
+      <div className="mobile-sticky-bar" role="navigation" aria-label="Quick actions">
+        <a className="sticky-btn sticky-primary" href="#contact">
+          Book Demo
+        </a>
+        <a className="sticky-btn" href="#contact">
+          Contact
+        </a>
+        <a className="sticky-btn" href="#pricing">
+          Pricing
+        </a>
+      </div>
     </div>
   );
 }
