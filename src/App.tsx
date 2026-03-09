@@ -202,8 +202,8 @@ export default function App() {
             <p>Email us and we will help you onboard your church, configure billing, and go live fast.</p>
           </div>
           <div className="contact-actions">
-            <a className="btn btn-primary" href="mailto:support@church-circle.com?subject=Church%20Circle%20Demo%20Request">
-              support@church-circle.com
+            <a className="btn btn-primary" href="mailto:info@church-circle.com?subject=Church%20Circle%20Demo%20Request">
+              info@church-circle.com
             </a>
             <a className="btn btn-ghost" href="mailto:sales@church-circle.com?subject=Church%20Circle%20Pricing%20Question">
               Contact Sales
