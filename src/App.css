@@ -516,6 +516,29 @@ h2 {
   padding-bottom: 0.9rem;
 }
 
+.section-flexibility {
+  padding-top: 0.2rem;
+}
+
+.flexibility-card {
+  background: linear-gradient(160deg, #fff6e8, #fffdf7);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+  padding: 1rem 1.1rem;
+}
+
+.flexibility-card ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.flexibility-card li {
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 0.45rem;
+}
+
 .pricing-board {
   background: var(--surface);
   border: 1px solid var(--line);

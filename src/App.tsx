@@ -149,6 +149,12 @@ const faqItems = [
   },
 ];
 
+const flexibilityPoints = [
+  "Cool new features are added regularly based on real church feedback.",
+  "Clients can request custom features for their church workflow.",
+  "Church admins can turn off features that are not needed for their church.",
+];
+
 const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
   return new Intl.NumberFormat("en-GB", {
     style: "currency",
@@ -465,6 +471,20 @@ export default function App() {
                 </article>
               );
             })}
+          </div>
+        </section>
+
+        <section className="section section-flexibility">
+          <div className="section-head reveal">
+            <p className="eyebrow">Product Flexibility</p>
+            <h2>Built to adapt to each church, not force one rigid setup.</h2>
+          </div>
+          <div className="flexibility-card reveal">
+            <ul>
+              {flexibilityPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
           </div>
         </section>
 
