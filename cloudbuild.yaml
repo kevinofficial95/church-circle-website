@@ -8,7 +8,7 @@ steps:
     args:
       - build
       - -t
-      - gcr.io/$PROJECT_ID/${_SERVICE}:$COMMIT_SHA
+      - gcr.io/$PROJECT_ID/${_SERVICE}:$BUILD_ID
       - --build-arg
       - VITE_CONTACT_FORM_ENDPOINT=${_VITE_CONTACT_FORM_ENDPOINT}
       - .
@@ -16,7 +16,7 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - gcr.io/$PROJECT_ID/${_SERVICE}:$COMMIT_SHA
+      - gcr.io/$PROJECT_ID/${_SERVICE}:$BUILD_ID
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     entrypoint: gcloud
@@ -25,7 +25,7 @@ steps:
       - deploy
       - ${_SERVICE}
       - --image
-      - gcr.io/$PROJECT_ID/${_SERVICE}:$COMMIT_SHA
+      - gcr.io/$PROJECT_ID/${_SERVICE}:$BUILD_ID
       - --region
       - ${_REGION}
       - --platform
@@ -34,7 +34,7 @@ steps:
       - --quiet
 
 images:
-  - gcr.io/$PROJECT_ID/${_SERVICE}:$COMMIT_SHA
+  - gcr.io/$PROJECT_ID/${_SERVICE}:$BUILD_ID
 
 options:
   logging: CLOUD_LOGGING_ONLY
