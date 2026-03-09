@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./App.css";
 
 type PricingTier = {
@@ -64,9 +65,33 @@ const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
 const usdValue = (gbpValue: number): number => gbpValue * GBP_TO_USD;
 
 export default function App() {
+  useEffect(() => {
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+    if (targets.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="site-shell">
       <header className="hero">
+        <div className="ambient ambient-one" aria-hidden="true" />
+        <div className="ambient ambient-two" aria-hidden="true" />
         <nav className="top-nav">
           <div className="brand-mark">Church Circle</div>
           <div className="nav-actions">
@@ -77,7 +102,7 @@ export default function App() {
         </nav>
 
         <div className="hero-grid">
-          <div>
+          <div className="reveal">
             <p className="eyebrow">Church Management Platform</p>
             <h1>Run your church community from one trusted platform.</h1>
             <p className="hero-copy">
@@ -94,7 +119,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="highlight-panel">
+          <div className="highlight-panel reveal">
             {launchHighlights.map((item, index) => (
               <div key={item} className="highlight-pill" style={{ animationDelay: `${index * 80}ms` }}>
                 {item}
@@ -106,13 +131,13 @@ export default function App() {
 
       <main>
         <section id="features" className="section section-features">
-          <div className="section-head">
+          <div className="section-head reveal">
             <p className="eyebrow">What You Get</p>
             <h2>Built for pastors, admins, and every member in your church.</h2>
           </div>
           <div className="feature-grid">
             {featureGroups.map((group, groupIndex) => (
-              <article key={group.title} className="feature-card" style={{ animationDelay: `${groupIndex * 90}ms` }}>
+              <article key={group.title} className="feature-card reveal" style={{ transitionDelay: `${groupIndex * 90}ms` }}>
                 <h3>{group.title}</h3>
                 <ul>
                   {group.points.map((point) => (
@@ -125,12 +150,12 @@ export default function App() {
         </section>
 
         <section id="pricing" className="section section-pricing">
-          <div className="section-head">
+          <div className="section-head reveal">
             <p className="eyebrow">Pricing</p>
             <h2>Simple monthly pricing based on member count.</h2>
           </div>
 
-          <div className="pricing-board" role="table" aria-label="Pricing tiers">
+          <div className="pricing-board reveal" role="table" aria-label="Pricing tiers">
             {pricingTiers.map((tier) => (
               <div key={tier.memberRange} className="pricing-row" role="row">
                 <div className="pricing-range" role="cell">
@@ -144,31 +169,31 @@ export default function App() {
             ))}
           </div>
 
-          <p className="pricing-footnote">Per-member cost is only pence across every tier.</p>
+          <p className="pricing-footnote reveal">Per-member cost is only pence across every tier.</p>
         </section>
 
         <section className="section section-trust">
-          <div className="section-head">
+          <div className="section-head reveal">
             <p className="eyebrow">Trust</p>
             <h2>Designed for live ministry operations.</h2>
           </div>
           <div className="trust-grid">
-            <div className="trust-card">
+            <div className="trust-card reveal">
               <h3>Live-ready communication</h3>
               <p>Prayer line conference calls, push notifications, and real-time member updates.</p>
             </div>
-            <div className="trust-card">
+            <div className="trust-card reveal" style={{ transitionDelay: "80ms" }}>
               <h3>Financial visibility</h3>
               <p>One-time and recurring giving, donation history, and receipt support in-app.</p>
             </div>
-            <div className="trust-card">
+            <div className="trust-card reveal" style={{ transitionDelay: "160ms" }}>
               <h3>Church leadership controls</h3>
               <p>Role-based access, approvals, and user administration across churches.</p>
             </div>
           </div>
         </section>
 
-        <section id="contact" className="section section-contact">
+        <section id="contact" className="section section-contact reveal">
           <div>
             <p className="eyebrow">Contact</p>
             <h2>Ready to launch Church Circle in your ministry?</h2>
