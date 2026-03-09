@@ -429,6 +429,14 @@ h2 {
 }
 
 @media (max-width: 980px) {
+  .hero {
+    padding-top: 1.3rem;
+  }
+
+  .top-nav {
+    margin-bottom: 1.5rem;
+  }
+
   .hero-grid,
   .feature-grid,
   .trust-grid,
@@ -440,9 +448,17 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .pricing-range {
+    font-size: 0.98rem;
+  }
+
   .pricing-amount {
     justify-items: start;
     justify-self: start;
+  }
+
+  .section-contact {
+    padding: 1.2rem;
   }
 
   .highlight-pill {
@@ -456,6 +472,137 @@ h2 {
 
   .site-footer a {
     margin: 0 1rem 0 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero,
+  .section,
+  .site-footer {
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
+  }
+
+  .top-nav {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .nav-actions {
+    flex-wrap: wrap;
+    gap: 0.5rem 0.85rem;
+  }
+
+  h1 {
+    max-width: 18ch;
+  }
+
+  .hero-copy {
+    font-size: 0.98rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .cta-row {
+    width: 100%;
+  }
+
+  .cta-row .btn {
+    text-align: center;
+    width: 100%;
+  }
+
+  .highlight-panel {
+    padding: 0.82rem;
+  }
+
+  .highlight-pill {
+    font-size: 0.98rem;
+    padding: 0.74rem 0.78rem;
+  }
+
+  .feature-card,
+  .trust-card {
+    padding: 0.92rem 0.88rem;
+  }
+
+  .feature-card li {
+    margin-bottom: 0.36rem;
+  }
+
+  .pricing-board {
+    padding: 0.45rem;
+  }
+
+  .pricing-row {
+    gap: 0.38rem;
+    padding: 0.74rem 0.78rem;
+  }
+
+  .pricing-amount strong {
+    font-size: 0.96rem;
+  }
+
+  .pricing-amount span {
+    font-size: 0.8rem;
+  }
+
+  .pricing-footnote {
+    font-size: 0.92rem;
+  }
+
+  .section-contact .btn {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-mark {
+    font-size: 1.2rem;
+  }
+
+  .nav-actions a {
+    font-size: 0.88rem;
+  }
+
+  .eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+  }
+
+  h1 {
+    font-size: clamp(1.74rem, 8.5vw, 2.2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.4rem, 7.2vw, 1.8rem);
+  }
+
+  .hero-copy,
+  .section-contact p,
+  .trust-card p,
+  .feature-card li {
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .ambient-one {
+    height: 180px;
+    right: -80px;
+    top: -50px;
+    width: 180px;
+  }
+
+  .ambient-two {
+    height: 200px;
+    left: -90px;
+    top: 210px;
+    width: 200px;
   }
 }
 
