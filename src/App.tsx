@@ -48,6 +48,7 @@ const featureGroups = [
 
 const launchHighlights = [
   "30-day free trial",
+  "24/7 support",
   "Built for churches of every size",
   "Fast setup for churches of every size",
   "Gift Aid-ready giving support",
