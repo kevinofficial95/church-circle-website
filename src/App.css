@@ -497,12 +497,14 @@ h2 {
 
 .faq-answer {
   display: grid;
+  overflow: hidden;
   grid-template-rows: 0fr;
   transition: grid-template-rows 260ms ease;
 }
 
 .faq-answer p {
   color: var(--ink-soft);
+  min-height: 0;
   margin: 0;
   overflow: hidden;
   padding: 0 1rem;

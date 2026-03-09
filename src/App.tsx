@@ -461,7 +461,7 @@ export default function App() {
               const isOpen = activeFaqIndex === index;
               return (
                 <article key={item.question} className={`faq-item reveal ${isOpen ? "is-open" : ""}`}>
-                  <button className="faq-trigger" onClick={() => setActiveFaqIndex(isOpen ? null : index)} aria-expanded={isOpen}>
+                  <button className="faq-trigger" type="button" onClick={() => setActiveFaqIndex(index)} aria-expanded={isOpen}>
                     <span>{item.question}</span>
                     <span className="faq-icon">{isOpen ? "−" : "+"}</span>
                   </button>
