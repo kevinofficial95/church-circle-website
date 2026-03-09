@@ -140,9 +140,6 @@ export default function App() {
                   <strong>{formatCurrency(tier.monthlyGbp, "GBP")}/month per church</strong>
                   <span>{formatCurrency(usdValue(tier.monthlyGbp), "USD")}/month per church</span>
                 </div>
-                <div className="pricing-per-member" role="cell">
-                  Built for welcoming, growing church families
-                </div>
               </div>
             ))}
           </div>

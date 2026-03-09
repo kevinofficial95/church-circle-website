@@ -254,13 +254,6 @@ h2 {
   opacity: 0.92;
 }
 
-.pricing-per-member {
-  font-family: "Space Grotesk", "Segoe UI", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  justify-self: end;
-}
-
 .pricing-footnote {
   color: var(--brand-deep);
   font-family: "Space Grotesk", "Segoe UI", sans-serif;
@@ -359,8 +352,7 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .pricing-amount,
-  .pricing-per-member {
+  .pricing-amount {
     justify-items: start;
     justify-self: start;
   }
