@@ -171,7 +171,10 @@ export default function App() {
         <div className="ambient ambient-one" aria-hidden="true" />
         <div className="ambient ambient-two" aria-hidden="true" />
         <nav className="top-nav">
-          <div className="brand-mark">Church Circle</div>
+          <div className="brand-mark">
+            <img className="brand-logo" src="/church-circle-logo.png" alt="Church Circle logo" />
+            <span>Church Circle</span>
+          </div>
           <div className="nav-actions">
             <a href="#pricing">Pricing</a>
             <a href="#features">Features</a>

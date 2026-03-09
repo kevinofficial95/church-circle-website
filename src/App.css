@@ -71,10 +71,21 @@
 }
 
 .brand-mark {
+  align-items: center;
+  display: inline-flex;
   font-family: "Space Grotesk", "Segoe UI", sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
+  gap: 0.55rem;
   letter-spacing: 0.02em;
+}
+
+.brand-logo {
+  border-radius: 999px;
+  display: block;
+  height: 34px;
+  object-fit: cover;
+  width: 34px;
 }
 
 .nav-actions {
@@ -659,7 +670,12 @@ h2 {
 
 @media (max-width: 480px) {
   .brand-mark {
-    font-size: 1.2rem;
+    font-size: 1.14rem;
+  }
+
+  .brand-logo {
+    height: 30px;
+    width: 30px;
   }
 
   .nav-actions a {
