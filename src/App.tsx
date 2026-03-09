@@ -63,10 +63,6 @@ const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
 
 const usdValue = (gbpValue: number): number => gbpValue * GBP_TO_USD;
 
-const pencePerMember = (tier: PricingTier): number => {
-  return Math.round((tier.monthlyGbp / tier.maxMembers) * 100);
-};
-
 export default function App() {
   return (
     <div className="site-shell">
@@ -145,7 +141,7 @@ export default function App() {
                   <span>{formatCurrency(usdValue(tier.monthlyGbp), "USD")}/month per church</span>
                 </div>
                 <div className="pricing-per-member" role="cell">
-                  ~{pencePerMember(tier)}p/member per church
+                  Built for welcoming, growing church families
                 </div>
               </div>
             ))}
