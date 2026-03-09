@@ -145,7 +145,8 @@ const faqItems = [
   },
   {
     question: "How do notifications reach members?",
-    answer: "Members receive in-app notifications, and key updates can be sent through the communication tools in Church Circle.",
+    answer:
+      "Members receive both in-app and push notifications, and key updates are delivered through Church Circle communication tools.",
   },
   {
     question: "Do you provide onboarding help for church admins?",
