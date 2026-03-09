@@ -41,16 +41,16 @@ const featureGroups = [
       "Church admin, pastor, trustee, and believer roles",
       "Signup approvals for church and believer onboarding",
       "User management with activation controls",
-      "Stripe-powered donations and recurring giving",
+      "Donations and recurring giving with clear tracking",
     ],
   },
 ];
 
 const launchHighlights = [
   "30-day free trial",
-  "Launch date: April 1",
+  "Built for churches of every size",
   "Fast setup for churches of every size",
-  "Per-member pricing stays in pence",
+  "Gift Aid-ready giving support",
 ];
 
 const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
@@ -169,7 +169,9 @@ export default function App() {
             ))}
           </div>
 
-          <p className="pricing-footnote reveal">Per-member cost is only pence across every tier.</p>
+          <p className="pricing-footnote reveal">
+            Revenue-focused pricing built to help churches grow giving and claim Gift Aid with confidence.
+          </p>
         </section>
 
         <section className="section section-trust">
@@ -183,8 +185,8 @@ export default function App() {
               <p>Prayer line conference calls, push notifications, and real-time member updates.</p>
             </div>
             <div className="trust-card reveal" style={{ transitionDelay: "80ms" }}>
-              <h3>Financial visibility</h3>
-              <p>One-time and recurring giving, donation history, and receipt support in-app.</p>
+              <h3>Revenue growth and Gift Aid</h3>
+              <p>Increase church giving with one-time and recurring donations, plus stronger Gift Aid claim support.</p>
             </div>
             <div className="trust-card reveal" style={{ transitionDelay: "160ms" }}>
               <h3>Church leadership controls</h3>
