@@ -63,6 +63,7 @@ const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
 };
 
 const usdValue = (gbpValue: number): number => gbpValue * GBP_TO_USD;
+const contactFormEndpoint = (import.meta.env.VITE_CONTACT_FORM_ENDPOINT ?? "").trim();
 
 export default function App() {
   const [contactForm, setContactForm] = useState({
@@ -72,6 +73,7 @@ export default function App() {
     message: "",
   });
   const [contactStatus, setContactStatus] = useState("");
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
 
   useEffect(() => {
     const targets = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
@@ -123,15 +125,44 @@ export default function App() {
       return;
     }
 
-    const subject = encodeURIComponent(`Church Circle enquiry from ${fullName}`);
-    const body = encodeURIComponent(
-      `Name: ${fullName}\nEmail: ${email}\nChurch: ${churchName || "Not provided"}\n\nMessage:\n${message}`
-    );
-    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@church-circle.com&su=${subject}&body=${body}`;
+    if (!contactFormEndpoint) {
+      setContactStatus("Contact form not configured yet. Please email info@church-circle.com directly.");
+      return;
+    }
 
-    window.open(gmailComposeUrl, "_blank", "noopener,noreferrer");
-    await copyInfoEmail();
-    setContactStatus("Compose window opened. If it did not open, email info@church-circle.com directly.");
+    setIsSubmittingContact(true);
+    try {
+      const response = await fetch(contactFormEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: fullName,
+          email,
+          churchName,
+          message,
+          _subject: `Church Circle enquiry from ${fullName}`,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Contact submission failed");
+      }
+
+      setContactForm({
+        fullName: "",
+        email: "",
+        churchName: "",
+        message: "",
+      });
+      setContactStatus("Message sent. We will get back to you soon.");
+    } catch {
+      setContactStatus("Unable to send right now. Please email info@church-circle.com directly.");
+    } finally {
+      setIsSubmittingContact(false);
+    }
   };
 
   return (
@@ -294,14 +325,17 @@ export default function App() {
               rows={4}
             />
             <div className="contact-actions">
-              <button className="btn btn-primary" type="submit">
-                Send Message
+              <button className="btn btn-primary" type="submit" disabled={isSubmittingContact}>
+                {isSubmittingContact ? "Sending..." : "Send Message"}
               </button>
               <button className="btn btn-ghost" type="button" onClick={() => void copyInfoEmail()}>
                 Copy info@church-circle.com
               </button>
             </div>
             {contactStatus ? <p className="contact-status">{contactStatus}</p> : null}
+            {!contactFormEndpoint ? (
+              <p className="contact-status">Set `VITE_CONTACT_FORM_ENDPOINT` to your Formspree/Web3Forms endpoint.</p>
+            ) : null}
           </form>
         </section>
       </main>

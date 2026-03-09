@@ -163,6 +163,12 @@ h2 {
   transform: translateY(0) scale(0.98);
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+  transform: none;
+}
+
 .btn-primary {
   background: linear-gradient(125deg, var(--brand), var(--accent));
   box-shadow: 0 14px 30px rgba(93, 53, 21, 0.26);
