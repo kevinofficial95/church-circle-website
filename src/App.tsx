@@ -96,7 +96,6 @@ export default function App() {
                 View Pricing
               </a>
             </div>
-            <p className="rate-note">USD shown as estimate at 1 GBP = 1.28 USD.</p>
           </div>
 
           <div className="highlight-panel">
@@ -142,11 +141,11 @@ export default function App() {
                   {tier.memberRange} members
                 </div>
                 <div className="pricing-amount" role="cell">
-                  <strong>{formatCurrency(tier.monthlyGbp, "GBP")}/month</strong>
-                  <span>{formatCurrency(usdValue(tier.monthlyGbp), "USD")}/month</span>
+                  <strong>{formatCurrency(tier.monthlyGbp, "GBP")}/month per church</strong>
+                  <span>{formatCurrency(usdValue(tier.monthlyGbp), "USD")}/month per church</span>
                 </div>
                 <div className="pricing-per-member" role="cell">
-                  ~{pencePerMember(tier)}p/member
+                  ~{pencePerMember(tier)}p/member per church
                 </div>
               </div>
             ))}
