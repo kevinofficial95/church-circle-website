@@ -1,42 +1,380 @@
-#root {
-  max-width: 1280px;
+:root {
+  --bg: #f5f8fc;
+  --bg-accent: #e9f2ff;
+  --surface: #ffffff;
+  --ink: #0f243f;
+  --ink-soft: #4b647f;
+  --line: #d6e2f2;
+  --brand: #2f6eb8;
+  --brand-deep: #1f4f8a;
+  --gold: #d89b2b;
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --shadow-soft: 0 22px 52px rgba(22, 67, 126, 0.12);
+}
+
+.site-shell {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 80% 10%, rgba(216, 155, 43, 0.16), transparent 35%),
+    radial-gradient(circle at 12% 25%, rgba(47, 110, 184, 0.18), transparent 42%),
+    linear-gradient(180deg, var(--bg-accent), var(--bg));
+  min-height: 100vh;
+}
+
+.hero {
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 2rem 1.2rem 1rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.top-nav {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
 }
 
-@keyframes logo-spin {
+.brand-mark {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 1.1rem;
+}
+
+.nav-actions a {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-actions a:hover {
+  color: var(--brand-deep);
+}
+
+.hero-grid {
+  display: grid;
+  gap: 1.3rem;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.eyebrow {
+  color: var(--brand-deep);
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  margin: 0 0 0.6rem;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 4.8vw, 3.7rem);
+  line-height: 1.03;
+  max-width: 16ch;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.7vw, 2.5rem);
+}
+
+.hero-copy {
+  color: var(--ink-soft);
+  font-size: 1.04rem;
+  line-height: 1.65;
+  margin: 1rem 0 1.4rem;
+  max-width: 58ch;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.btn {
+  border-radius: 999px;
+  display: inline-block;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.72rem 1.25rem;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(120deg, var(--brand), #558ed4);
+  box-shadow: 0 14px 30px rgba(47, 110, 184, 0.24);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--brand-deep);
+}
+
+.rate-note {
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  margin-top: 0.8rem;
+}
+
+.highlight-panel {
+  align-content: start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 0.7rem;
+  padding: 1rem;
+}
+
+.highlight-pill {
+  animation: riseIn 450ms ease both;
+  background: linear-gradient(100deg, #4078bb, #6d9ed9);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+  color: #fff;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 0.88rem 0.92rem;
+}
+
+.section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.2rem 1.2rem 2.7rem;
+}
+
+.section-head {
+  margin-bottom: 1rem;
+}
+
+.section-head h2 {
+  max-width: 22ch;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 0.95rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.feature-card,
+.trust-card {
+  animation: riseIn 500ms ease both;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: 1rem 1.05rem;
+}
+
+.feature-card h3,
+.trust-card h3 {
+  font-size: 1.18rem;
+  margin-bottom: 0.62rem;
+}
+
+.feature-card ul {
+  color: var(--ink-soft);
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.feature-card li {
+  line-height: 1.55;
+  margin-bottom: 0.45rem;
+}
+
+.pricing-board {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 0.6rem;
+}
+
+.pricing-row {
+  align-items: center;
+  background: linear-gradient(100deg, #4e80be, #6999cf);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 12px;
+  color: #fff;
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: 1.2fr 1fr 0.7fr;
+  margin-bottom: 0.52rem;
+  padding: 0.84rem 0.92rem;
+}
+
+.pricing-row:last-child {
+  margin-bottom: 0;
+}
+
+.pricing-range {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.pricing-amount {
+  display: grid;
+  justify-items: end;
+}
+
+.pricing-amount strong {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.pricing-amount span {
+  font-size: 0.86rem;
+  opacity: 0.92;
+}
+
+.pricing-per-member {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  justify-self: end;
+}
+
+.pricing-footnote {
+  color: var(--brand-deep);
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.8rem 0 0;
+}
+
+.trust-grid {
+  display: grid;
+  gap: 0.95rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.trust-card p {
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin: 0.45rem 0 0;
+}
+
+.section-contact {
+  align-items: center;
+  background: linear-gradient(130deg, #164b87, #2f6eb8);
+  border-radius: var(--radius-lg);
+  color: #fff;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr auto;
+  margin-top: 0.8rem;
+  padding: 1.4rem;
+}
+
+.section-contact p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.55;
+  margin: 0.6rem 0 0;
+}
+
+.contact-actions {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.section-contact .btn-primary {
+  background: linear-gradient(130deg, #f8cb66, #d89b2b);
+  color: #10253f;
+}
+
+.section-contact .btn-ghost {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.34);
+  color: #fff;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  display: flex;
+  font-size: 0.92rem;
+  justify-content: space-between;
+  margin-top: 1.3rem;
+  padding: 1.3rem 1.2rem 2rem;
+}
+
+.site-footer a {
+  color: var(--ink-soft);
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--brand-deep);
+}
+
+@keyframes riseIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(6px);
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 980px) {
+  .hero-grid,
+  .feature-grid,
+  .trust-grid,
+  .section-contact {
+    grid-template-columns: 1fr;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .pricing-row {
+    grid-template-columns: 1fr;
+  }
 
-.read-the-docs {
-  color: #888;
+  .pricing-amount,
+  .pricing-per-member {
+    justify-items: start;
+    justify-self: start;
+  }
+
+  .highlight-pill {
+    font-size: 1.08rem;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .site-footer a {
+    margin: 0 1rem 0 0;
+  }
 }
