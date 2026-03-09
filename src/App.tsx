@@ -78,7 +78,7 @@ const platformPreview = [
   {
     title: "Giving Experience",
     subtitle: "Designed for generosity",
-    points: ["One-time, weekly, monthly", "Gift Aid-ready flow", "Simple member checkout"],
+    points: ["One-time, weekly, monthly", "Gift Aid-ready flow", "Receipts sent to users automatically"],
   },
   {
     title: "Payments View",
