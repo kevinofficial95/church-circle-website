@@ -322,6 +322,49 @@ h2 {
   margin: 0.8rem 0 0;
 }
 
+.section-stores {
+  padding-top: 0.4rem;
+}
+
+.store-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.9rem;
+}
+
+.store-badge {
+  background: linear-gradient(180deg, #121212, #000);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+  color: #fff;
+  cursor: default;
+  min-width: 230px;
+  padding: 0.62rem 0.95rem;
+  user-select: none;
+}
+
+.store-badge-small {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+}
+
+.store-badge-big {
+  display: block;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 1.58rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.store-note {
+  color: var(--ink-soft);
+  margin-top: 0.7rem;
+}
+
 .trust-grid {
   display: grid;
   gap: 0.95rem;
@@ -359,7 +402,8 @@ h2 {
 }
 
 .contact-actions {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.6rem;
 }
 
@@ -372,6 +416,43 @@ h2 {
   background: rgba(255, 255, 255, 0.11);
   border-color: rgba(255, 255, 255, 0.34);
   color: #fff;
+}
+
+.contact-form {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  display: grid;
+  gap: 0.58rem;
+  min-width: 340px;
+  padding: 0.85rem;
+}
+
+.contact-input,
+.contact-textarea {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  color: #2f241a;
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  padding: 0.64rem 0.72rem;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  border-color: #f0c97a;
+  outline: 2px solid rgba(240, 201, 122, 0.35);
+}
+
+.contact-textarea {
+  resize: vertical;
+}
+
+.contact-status {
+  color: #fff6de;
+  font-size: 0.88rem;
+  margin: 0.2rem 0 0;
 }
 
 .site-footer {
@@ -459,6 +540,10 @@ h2 {
 
   .section-contact {
     padding: 1.2rem;
+  }
+
+  .contact-form {
+    min-width: 100%;
   }
 
   .highlight-pill {
@@ -551,8 +636,18 @@ h2 {
     font-size: 0.92rem;
   }
 
-  .section-contact .btn {
+  .section-contact .btn,
+  .contact-actions .btn {
     text-align: center;
+    width: 100%;
+  }
+
+  .store-badge {
+    min-width: 100%;
+  }
+
+  .store-badge-big {
+    font-size: 1.4rem;
   }
 }
 

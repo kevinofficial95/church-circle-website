@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import "./App.css";
 
 type PricingTier = {
@@ -65,6 +65,14 @@ const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
 const usdValue = (gbpValue: number): number => gbpValue * GBP_TO_USD;
 
 export default function App() {
+  const [contactForm, setContactForm] = useState({
+    fullName: "",
+    email: "",
+    churchName: "",
+    message: "",
+  });
+  const [contactStatus, setContactStatus] = useState("");
+
   useEffect(() => {
     const targets = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
     if (targets.length === 0) {
@@ -86,6 +94,45 @@ export default function App() {
     targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
   }, []);
+
+  const onContactFieldChange =
+    (key: "fullName" | "email" | "churchName" | "message") =>
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setContactForm((previous) => ({ ...previous, [key]: event.target.value }));
+    };
+
+  const copyInfoEmail = async (): Promise<void> => {
+    try {
+      await navigator.clipboard.writeText("info@church-circle.com");
+      setContactStatus("Copied: info@church-circle.com");
+    } catch {
+      setContactStatus("Please email info@church-circle.com");
+    }
+  };
+
+  const onContactSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault();
+
+    const fullName = contactForm.fullName.trim();
+    const email = contactForm.email.trim();
+    const churchName = contactForm.churchName.trim();
+    const message = contactForm.message.trim();
+
+    if (!fullName || !email || !message) {
+      setContactStatus("Please fill your name, email, and message.");
+      return;
+    }
+
+    const subject = encodeURIComponent(`Church Circle enquiry from ${fullName}`);
+    const body = encodeURIComponent(
+      `Name: ${fullName}\nEmail: ${email}\nChurch: ${churchName || "Not provided"}\n\nMessage:\n${message}`
+    );
+    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@church-circle.com&su=${subject}&body=${body}`;
+
+    window.open(gmailComposeUrl, "_blank", "noopener,noreferrer");
+    await copyInfoEmail();
+    setContactStatus("Compose window opened. If it did not open, email info@church-circle.com directly.");
+  };
 
   return (
     <div className="site-shell">
@@ -195,20 +242,67 @@ export default function App() {
           </div>
         </section>
 
+        <section className="section section-stores reveal">
+          <div className="section-head">
+            <p className="eyebrow">Mobile Apps</p>
+            <h2>Available in App Store and Google Play</h2>
+          </div>
+          <div className="store-badges" aria-label="Store availability badges">
+            <div className="store-badge store-badge-apple" role="img" aria-label="Available on the App Store">
+              <span className="store-badge-small">Available on the</span>
+              <span className="store-badge-big">App Store</span>
+            </div>
+            <div className="store-badge store-badge-google" role="img" aria-label="Get it on Google Play">
+              <span className="store-badge-small">Get it on</span>
+              <span className="store-badge-big">Google Play</span>
+            </div>
+          </div>
+          <p className="store-note">Store links will be enabled once app listings are live.</p>
+        </section>
+
         <section id="contact" className="section section-contact reveal">
           <div>
             <p className="eyebrow">Contact</p>
             <h2>Ready to launch Church Circle in your ministry?</h2>
             <p>Email us and we will help you onboard your church, configure billing, and go live fast.</p>
           </div>
-          <div className="contact-actions">
-            <a className="btn btn-primary" href="mailto:info@church-circle.com?subject=Church%20Circle%20Demo%20Request">
-              info@church-circle.com
-            </a>
-            <a className="btn btn-ghost" href="mailto:sales@church-circle.com?subject=Church%20Circle%20Pricing%20Question">
-              Contact Sales
-            </a>
-          </div>
+          <form className="contact-form" onSubmit={(event) => void onContactSubmit(event)}>
+            <input
+              className="contact-input"
+              value={contactForm.fullName}
+              onChange={onContactFieldChange("fullName")}
+              placeholder="Your full name"
+            />
+            <input
+              className="contact-input"
+              type="email"
+              value={contactForm.email}
+              onChange={onContactFieldChange("email")}
+              placeholder="Your email"
+            />
+            <input
+              className="contact-input"
+              value={contactForm.churchName}
+              onChange={onContactFieldChange("churchName")}
+              placeholder="Church name (optional)"
+            />
+            <textarea
+              className="contact-textarea"
+              value={contactForm.message}
+              onChange={onContactFieldChange("message")}
+              placeholder="How can we help your church?"
+              rows={4}
+            />
+            <div className="contact-actions">
+              <button className="btn btn-primary" type="submit">
+                Send Message
+              </button>
+              <button className="btn btn-ghost" type="button" onClick={() => void copyInfoEmail()}>
+                Copy info@church-circle.com
+              </button>
+            </div>
+            {contactStatus ? <p className="contact-status">{contactStatus}</p> : null}
+          </form>
         </section>
       </main>
 
