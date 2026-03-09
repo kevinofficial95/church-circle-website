@@ -128,24 +128,32 @@ const screenshotSlides = [
 
 const faqItems = [
   {
-    question: "How does pricing work?",
-    answer: "Pricing is based on active member range per church, billed monthly with a 30-day free trial.",
+    question: "How long does initial setup take?",
+    answer: "Most churches can be set up within a few days, including roles, events, announcements, and giving configuration.",
   },
   {
-    question: "How can we onboard our church?",
-    answer: "Most churches can onboard within days with guided setup for users, roles, events, announcements, and giving.",
+    question: "Can different roles have different permissions?",
+    answer: "Yes. Church Circle supports role-based access so pastors, admins, trustees, and members see the right controls.",
   },
   {
-    question: "Who owns our church data?",
-    answer: "Your church retains ownership of your data. Church Circle acts as the platform provider only.",
+    question: "How do prayer line calls work for members?",
+    answer: "Leaders can start a prayer line and members can join live from the app with real-time participation updates.",
   },
   {
-    question: "How is support handled after we go live?",
-    answer: "Our team provides direct support with fast response times, plus practical onboarding and rollout guidance.",
+    question: "Can we manage recurring and one-time giving in one place?",
+    answer: "Yes. The giving flow supports both one-time and recurring giving in one unified church giving experience.",
   },
   {
-    question: "Can we turn off features we do not need?",
-    answer: "Yes. Church leaders can enable or disable modules based on their ministry needs and growth stage.",
+    question: "How do notifications reach members?",
+    answer: "Members receive in-app notifications, and key updates can be sent through the communication tools in Church Circle.",
+  },
+  {
+    question: "Do you provide onboarding help for church admins?",
+    answer: "Yes. We provide guided onboarding support to help church admins launch smoothly and train their teams.",
+  },
+  {
+    question: "Can we request custom features for our ministry needs?",
+    answer: "Yes. We regularly review client requests and prioritize feature delivery based on church impact.",
   },
 ];
 
