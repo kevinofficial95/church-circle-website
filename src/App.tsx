@@ -54,6 +54,39 @@ const launchHighlights = [
   "Gift Aid-ready giving support",
 ];
 
+const platformPreview = [
+  {
+    title: "Shepherd Board",
+    subtitle: "Daily ministry pulse",
+    points: ["Upcoming events at a glance", "Prayer-ready dashboard", "Weather-aware planning"],
+  },
+  {
+    title: "Events Explorer",
+    subtitle: "Search, filter, and manage",
+    points: ["List + calendar modes", "Attendance tracking", "Recurring event control"],
+  },
+  {
+    title: "Announcements Board",
+    subtitle: "Clear communication to everyone",
+    points: ["Post updates in seconds", "Read tracking", "Admin edit controls"],
+  },
+  {
+    title: "Sermons + Prayer Line",
+    subtitle: "Live spiritual engagement",
+    points: ["Audio upload and recording", "Start/join prayer line", "Real-time member participation"],
+  },
+  {
+    title: "Giving Experience",
+    subtitle: "Designed for generosity",
+    points: ["One-time, weekly, monthly", "Gift Aid-ready flow", "Simple member checkout"],
+  },
+  {
+    title: "Payments View",
+    subtitle: "Operational clarity for leaders",
+    points: ["Church transaction history", "Net vs fee visibility", "Reliable giving records"],
+  },
+];
+
 const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
   return new Intl.NumberFormat("en-GB", {
     style: "currency",
@@ -226,6 +259,31 @@ export default function App() {
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section section-preview">
+          <div className="section-head reveal">
+            <p className="eyebrow">Platform Preview</p>
+            <h2>See how Church Circle runs daily church life, end to end.</h2>
+          </div>
+          <div className="preview-grid">
+            {platformPreview.map((item, index) => (
+              <article key={item.title} className="preview-card reveal" style={{ transitionDelay: `${index * 70}ms` }}>
+                <div className="preview-phone-shell">
+                  <div className="preview-phone-notch" />
+                  <div className="preview-phone-content">
+                    <p className="preview-subtitle">{item.subtitle}</p>
+                    <h3>{item.title}</h3>
+                    <ul>
+                      {item.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
