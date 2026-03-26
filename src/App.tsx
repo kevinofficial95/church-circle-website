@@ -1,21 +1,6 @@
 import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent, type TouchEvent } from "react";
 import "./App.css";
 
-type PricingTier = {
-  memberRange: string;
-  maxMembers: number;
-  monthlyGbp: number;
-};
-
-const GBP_TO_USD = 1.28;
-const pricingTiers: PricingTier[] = [
-  { memberRange: "1-25", maxMembers: 25, monthlyGbp: 14.99 },
-  { memberRange: "25-50", maxMembers: 50, monthlyGbp: 24.99 },
-  { memberRange: "50-100", maxMembers: 100, monthlyGbp: 39.99 },
-  { memberRange: "100-150", maxMembers: 150, monthlyGbp: 59.99 },
-  { memberRange: "150-200", maxMembers: 200, monthlyGbp: 79.99 },
-];
-
 const featureGroups = [
   {
     title: "Community",
@@ -165,16 +150,6 @@ const flexibilityPoints = [
   "Church admins can turn off features that are not needed for their church.",
 ];
 
-const formatCurrency = (value: number, currency: "GBP" | "USD"): string => {
-  return new Intl.NumberFormat("en-GB", {
-    style: "currency",
-    currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value);
-};
-
-const usdValue = (gbpValue: number): number => gbpValue * GBP_TO_USD;
 const contactFormEndpoint = (import.meta.env.VITE_CONTACT_FORM_ENDPOINT ?? "").trim();
 
 export default function App() {
@@ -358,7 +333,6 @@ export default function App() {
             <span>Church Circle</span>
           </div>
           <div className="nav-actions">
-            <a href="#pricing">Pricing</a>
             <a href="#features">Features</a>
             <a href="#contact">Contact</a>
           </div>
@@ -375,9 +349,6 @@ export default function App() {
             <div className="cta-row">
               <a className="btn btn-primary" href="#contact">
                 Book a Demo
-              </a>
-              <a className="btn btn-ghost" href="#pricing">
-                View Pricing
               </a>
             </div>
           </div>
@@ -498,31 +469,6 @@ export default function App() {
           </div>
         </section>
 
-        <section id="pricing" className="section section-pricing">
-          <div className="section-head reveal">
-            <p className="eyebrow">Pricing</p>
-            <h2>Simple monthly pricing based on member count.</h2>
-          </div>
-
-          <div className="pricing-board reveal" role="table" aria-label="Pricing tiers">
-            {pricingTiers.map((tier) => (
-              <div key={tier.memberRange} className="pricing-row" role="row">
-                <div className="pricing-range" role="cell">
-                  {tier.memberRange} members
-                </div>
-                <div className="pricing-amount" role="cell">
-                  <strong>{formatCurrency(tier.monthlyGbp, "GBP")}/month per church</strong>
-                  <span>{formatCurrency(usdValue(tier.monthlyGbp), "USD")}/month per church</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="pricing-footnote reveal">
-            Revenue-focused pricing built to help churches grow giving and claim Gift Aid with confidence.
-          </p>
-        </section>
-
         <section className="section section-trust">
           <div className="section-head reveal">
             <p className="eyebrow">Trust</p>
@@ -625,9 +571,6 @@ export default function App() {
         </a>
         <a className="sticky-btn" href="#contact">
           Contact
-        </a>
-        <a className="sticky-btn" href="#pricing">
-          Pricing
         </a>
       </div>
     </div>
